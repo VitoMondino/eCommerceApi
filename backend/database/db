@@ -1,0 +1,55 @@
+-- Crear la base de datos
+CREATE DATABASE ecommerce;
+USE ecommerce;
+
+-- Crear la tabla 'Rubros'
+CREATE TABLE Rubros (
+    Codigo INT PRIMARY KEY AUTO_INCREMENT,
+    Descripcion VARCHAR(80) NOT NULL
+);
+
+-- Crear la tabla 'Productos'
+CREATE TABLE Productos (
+    Codigo INT PRIMARY KEY AUTO_INCREMENT,
+    Descripcion VARCHAR(80) NOT NULL,
+    Rubro INT,
+    Precio DECIMAL(15,2),
+    URLImagen VARCHAR(120),
+    FOREIGN KEY (Rubro) REFERENCES Rubros(Codigo) ON DELETE SET NULL
+);
+
+INSERT INTO Rubros (Descripcion) VALUES 
+('Electrónica'),
+('Ropa'),
+('Hogar'),
+('Deportes');
+
+INSERT INTO Productos (Descripcion, Rubro, Precio, URLImagen) VALUES
+('Smartphone', 1, 999.99, 'https://via.placeholder.com/150'),
+('Camiseta Deportiva', 2, 29.99, 'https://via.placeholder.com/150'),
+('Cafetera', 3, 79.99, 'https://via.placeholder.com/150'),
+('Pelota de Fútbol', 4, 19.99, 'https://via.placeholder.com/150');
+USE ecommerce;
+INSERT INTO Productos (Descripcion, Rubro, Precio, URLImagen) VALUES
+('Laptop Gamer', 1, 1299.99, 'https://via.placeholder.com/150'),
+('Auriculares Inalámbricos', 1, 59.99, 'https://via.placeholder.com/150'),
+('Smartwatch', 1, 199.99, 'https://via.placeholder.com/150'),
+('Zapatillas Running', 2, 89.99, 'https://via.placeholder.com/150'),
+('Chaqueta de Invierno', 2, 119.99, 'https://via.placeholder.com/150'),
+('Lámpara de Mesa', 3, 39.99, 'https://via.placeholder.com/150'),
+('Batidora de Pie', 3, 149.99, 'https://via.placeholder.com/150'),
+('Juego de Sábanas', 3, 59.99, 'https://via.placeholder.com/150'),
+('Bicicleta de Montaña', 4, 299.99, 'https://via.placeholder.com/150'),
+('Balón de Baloncesto', 4, 25.99, 'https://via.placeholder.com/150'),
+('Guantes de Boxeo', 4, 45.99, 'https://via.placeholder.com/150');
+
+
+SELECT 
+    p.Codigo, 
+    p.Descripcion, 
+    p.Precio, 
+    r.Descripcion AS Rubro 
+FROM 
+    Productos p 
+LEFT JOIN 
+    Rubros r ON p.Rubro = r.Codigo;
