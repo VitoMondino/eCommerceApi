@@ -1,0 +1,3 @@
+para ejecutar el programa:
+cd backend
+node server.js
