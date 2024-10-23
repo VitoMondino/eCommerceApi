@@ -1,7 +1,6 @@
 -- Crear la base de datos
 CREATE DATABASE ecommerce;
 USE ecommerce;
-
 -- Crear la tabla 'Rubros'
 CREATE TABLE Rubros (
     Codigo INT PRIMARY KEY AUTO_INCREMENT,
@@ -24,24 +23,27 @@ INSERT INTO Rubros (Descripcion) VALUES
 ('Hogar'),
 ('Deportes');
 
-INSERT INTO Productos (Descripcion, Rubro, Precio, URLImagen) VALUES
-('Smartphone', 1, 999.99, 'https://via.placeholder.com/150'),
-('Camiseta Deportiva', 2, 29.99, 'https://via.placeholder.com/150'),
-('Cafetera', 3, 79.99, 'https://via.placeholder.com/150'),
-('Pelota de Fútbol', 4, 19.99, 'https://via.placeholder.com/150');
 USE ecommerce;
-INSERT INTO Productos (Descripcion, Rubro, Precio, URLImagen) VALUES
-('Laptop Gamer', 1, 1299.99, 'https://via.placeholder.com/150'),
-('Auriculares Inalámbricos', 1, 59.99, 'https://via.placeholder.com/150'),
-('Smartwatch', 1, 199.99, 'https://via.placeholder.com/150'),
-('Zapatillas Running', 2, 89.99, 'https://via.placeholder.com/150'),
-('Chaqueta de Invierno', 2, 119.99, 'https://via.placeholder.com/150'),
-('Lámpara de Mesa', 3, 39.99, 'https://via.placeholder.com/150'),
-('Batidora de Pie', 3, 149.99, 'https://via.placeholder.com/150'),
-('Juego de Sábanas', 3, 59.99, 'https://via.placeholder.com/150'),
-('Bicicleta de Montaña', 4, 299.99, 'https://via.placeholder.com/150'),
-('Balón de Baloncesto', 4, 25.99, 'https://via.placeholder.com/150'),
-('Guantes de Boxeo', 4, 45.99, 'https://via.placeholder.com/150');
+ALTER TABLE Productos MODIFY COLUMN URLImagen VARCHAR(10000);
+
+-- Ahora podemos insertar los productos con las URLs largas
+INSERT INTO Productos (Descripcion, Rubro, Precio, URLImagen) VALUES 
+('Smartphone', 1, 999.99, 'https://cdn.pixabay.com/photo/2013/07/12/18/39/smartphone-153650_1280.png'),
+('Camiseta Deportiva', 2, 29.99, 'https://cdn.pixabay.com/photo/2023/05/08/21/59/woman-7979850_1280.jpg'),
+('Cafetera', 3, 79.99, 'https://cdn.pixabay.com/photo/2012/04/14/14/46/percolator-34180_1280.png'),
+('Pelota de Fútbol', 4, 19.99, 'https://cdn.pixabay.com/photo/2013/07/13/13/34/football-161132_1280.png'),
+('Laptop Gamer', 1, 1299.99, 'https://cdn.pixabay.com/photo/2012/04/13/20/24/laptop-33521_1280.png'),
+('Auriculares Inalámbricos', 1, 59.99, 'https://cdn.pixabay.com/photo/2013/07/13/12/17/headphone-159569_1280.png'),
+('Smartwatch', 1, 199.99, 'https://cdn.pixabay.com/photo/2017/08/16/22/48/watch-2649380_1280.png'),
+('Zapatillas Running', 2, 89.99, 'https://cdn.pixabay.com/photo/2014/04/02/10/44/sneakers-304390_1280.png'),
+('Chaqueta de Invierno', 2, 119.99, 'https://cdn.pixabay.com/photo/2012/04/13/14/55/jacket-32714_1280.png'),
+('Lámpara de Mesa', 3, 39.99, 'https://cdn.pixabay.com/photo/2014/12/21/23/51/lamp-576185_1280.png'),
+('Batidora de Pie', 3, 149.99, 'https://cdn.pixabay.com/photo/2014/04/03/11/48/mixer-312201_1280.png'),
+('Juego de Sábanas', 3, 59.99, 'https://cdn.pixabay.com/photo/2012/04/26/10/29/quilt-41942_960_720.png'),
+('Bicicleta de Montaña', 4, 299.99, 'https://cdn.pixabay.com/photo/2015/05/08/10/54/bike-757914_1280.png'),
+('Balón de Baloncesto', 4, 25.99, 'https://cdn.pixabay.com/photo/2013/07/13/09/46/basketball-155997_1280.png'),
+('Guantes de Boxeo', 4, 45.99, 'https://cdn.pixabay.com/photo/2017/08/28/14/28/boxing-gloves-2689708_1280.png');
+
 
 
 SELECT 
@@ -53,3 +55,4 @@ FROM
     Productos p 
 LEFT JOIN 
     Rubros r ON p.Rubro = r.Codigo;
+

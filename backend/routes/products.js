@@ -6,13 +6,25 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     const { descripcion = '', rubro = '' } = req.query;
     try {
-        const [rows] = await pool.query(
-            `SELECT pro.Codigo, pro.Descripcion, pro.Precio, rub.Descripcion AS Rubro, pro.URLImagen
+        let query = `
+            SELECT pro.Codigo, pro.Descripcion, pro.Precio, rub.Descripcion AS Rubro, pro.URLImagen
             FROM productos pro
             LEFT JOIN rubros rub ON rub.Codigo = pro.Rubro
-            WHERE pro.Descripcion LIKE ? AND (rub.Codigo = ? OR ? = '')`,
-            [`%${descripcion}%`, rubro, rubro]
-        );
+            WHERE 1=1
+        `;
+        const params = [];
+
+        if (descripcion) {
+            query += ` AND pro.Descripcion LIKE ?`;
+            params.push(`%${descripcion}%`);
+        }
+
+        if (rubro) {
+            query += ` AND rub.Codigo = ?`;
+            params.push(rubro);
+        }
+
+        const [rows] = await pool.query(query, params);
         res.json(rows);
     } catch (error) {
         console.error('Error al obtener productos:', error);
